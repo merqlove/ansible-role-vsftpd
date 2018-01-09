@@ -62,20 +62,21 @@
     setype:   public_content_rw_t
     state:    present
   with_items: "{{ vsftpd_writable_dirs }}"
-  when: vsftpd_write_enable
+  when: vsftpd_write_enable and selinux_enabled
 
 - name: "Enable the SELinux Boolean: allow_ftpd_anon_write"
   seboolean:
     name:       allow_ftpd_anon_write
     state:      yes
     persistent: yes
-  when: vsftpd_anon_upload_enable
+  when: vsftpd_anon_upload_enable and selinux_enabled
 
 - name: "Enable the SELinux Boolean: ftpd_use_passive_mode"
   seboolean:
     name:       ftpd_use_passive_mode
     state:      yes
     persistent: yes
+  when: selinux_enabled  
 
 - name: Place vsftpd configuration file in place.
   template: src=vsftpd.conf.j2 dest=/etc/vsftpd/vsftpd.conf
