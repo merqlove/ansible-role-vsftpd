@@ -1,5 +1,5 @@
 ---
-
+selinux_enabled: true
 vsftpd_accept_timeout:            20
 vsftpd_allow_root_login:          false
 vsftpd_allow_writeable_chroot:    YES
